@@ -5,24 +5,29 @@ public class SimpleConsoleApplication implements ApplicationInterface{
     SimpleConsoleApplicationIOMethods simpleConsoleApplicationIOMethods = new SimpleConsoleApplicationIOMethods();
     CheckAndRequestFunctions checkAndRequestFunctions = new CheckAndRequestFunctions();
     CommunicationWithTheUser communicationWithTheUser = new CommunicationWithTheUser();
-    boolean runAp = true;
+    boolean RUN = true;
 
     public void runApplication(){
-        checkAndRequestFunctions.checkFileExistence();
-        while (runAp) {
-            showUserMenu();
-            handleUserSelection();
-            performSelectedAction();
+        try {
+            checkAndRequestFunctions.checkFileExistence();
+            while (RUN) {
+                showUserMenu();
+                handleUserSelection();
+                performSelectedAction();
+            }
+        }catch (Exception e){
+            System.out.println(e);
         }
+
     }
 
     public void showUserMenu(){
         communicationWithTheUser.showMenu();
-    };
+    }
 
     public void  handleUserSelection(){
         selectedItem = checkAndRequestFunctions.promptUserSelection();
-    };
+    }
 
     public void performSelectedAction(){
         if(selectedItem.equals("1")){
@@ -34,7 +39,7 @@ public class SimpleConsoleApplication implements ApplicationInterface{
         } else if(selectedItem.equals("4")){
             simpleConsoleApplicationIOMethods.deleteEntryInDictionary();
         } else if (selectedItem.equals("5")){
-            runAp = false;
+            RUN = false;
         }
-    };
+    }
 }

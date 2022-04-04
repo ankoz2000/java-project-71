@@ -1,5 +1,7 @@
 package MyApplication;
 
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -10,7 +12,10 @@ public class CheckAndRequestFunctions {
     String separator = File.separator;
     String numDict;
     String selectItem;
-    CommunicationWithTheUser communicationWithTheUser = new CommunicationWithTheUser();
+    ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(
+            "applicationContext.xml"
+    );
+    CommunicationWithTheUser communicationWithTheUser = context.getBean("communicationWithTheUser", CommunicationWithTheUser.class);
     Path path1 = Paths.get("C:" + separator + "LanguageDictionary.txt");
     Path path2 = Paths.get("C:" + separator + "NumericDictionary.txt");
     File file1 = new File("C:" + separator + "LanguageDictionary.txt");
