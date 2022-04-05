@@ -13,9 +13,10 @@ public class CheckAndRequestFunctions {
     String numDict;
     String selectItem;
     ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(
-            "applicationContext.xml"
+            "ApplicationContext.xml"
     );
-    CommunicationWithTheUser communicationWithTheUser = context.getBean("communicationWithTheUser", CommunicationWithTheUser.class);
+    CommunicationWithTheUser communicationWithTheUser = context.getBean("communicationBean", CommunicationWithTheUser.class);
+//    CommunicationWithTheUser communicationWithTheUser = new CommunicationWithTheUser();
     Path path1 = Paths.get("C:" + separator + "LanguageDictionary.txt");
     Path path2 = Paths.get("C:" + separator + "NumericDictionary.txt");
     File file1 = new File("C:" + separator + "LanguageDictionary.txt");
