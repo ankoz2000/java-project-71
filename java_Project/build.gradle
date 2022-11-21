@@ -26,3 +26,7 @@ application {
 compileJava {
     options.release = 16
 }
+
+run {
+    standardInput = System.in
+}
