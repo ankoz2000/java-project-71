@@ -71,8 +71,8 @@ public class Cli {
         return userInteraction.nextInt();
     }
 
-    public static void showEndMessage(String username) {
-        System.out.println("Congratulations, " + username);
+    public static void showEndMessage(String endMessage) {
+        System.out.println(endMessage);
         close();
     }
 
