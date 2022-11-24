@@ -1,16 +1,13 @@
 package hexlet.code.games;
 
 import hexlet.code.interfaces.Game;
+import hexlet.code.utils.RandomGenerator;
 
-import java.util.Random;
 
 public class Even implements Game {
-    private static Random random = new Random();
-    private static int low = 0;
-    private static int high = 100;
     private static String lastAnswer;
     private static String rightAnswer;
-    private String name = "Even";
+    private String name;
     private String question;
     private int randomNumber;
     private String rules;
@@ -26,13 +23,9 @@ public class Even implements Game {
     }
 
     public void startRound() {
-        randomNumber = generateRandomNumber();
+        randomNumber = RandomGenerator.getRandomNumber();
         question = String.valueOf(randomNumber);
         rightAnswer = isEven(randomNumber) ? "yes" : "no";
-    }
-
-    private static int generateRandomNumber() {
-        return random.nextInt((high + low) + 1) + low;
     }
 
     private static boolean isEven(int number) {

@@ -27,8 +27,9 @@ public class App {
                 Cli.showSuccessMessage("Correct!");
                 roundsCount--;
             } else {
-                Cli.showErrorMessage("\"" + game.getLastAnswer() + "\""
-                        + " is wrong answer. Right answer is \"" + game.getRightAnswer() + "\"");
+                Cli.showErrorMessage("'" + game.getLastAnswer() + "'"
+                        + " is wrong answer ;(. Correct answer was '" + game.getRightAnswer() + "'\n"
+                + "Let's try again, " + Greeting.getUsername() + "!");
             }
         }
 
