@@ -1,7 +1,5 @@
-package hexlet.code.app;
+package hexlet.code;
 
-import hexlet.code.Cli;
-import hexlet.code.GameStorage;
 import hexlet.code.games.Greeting;
 import hexlet.code.interfaces.Game;
 import hexlet.code.interfaces.GamePreprocessor;
