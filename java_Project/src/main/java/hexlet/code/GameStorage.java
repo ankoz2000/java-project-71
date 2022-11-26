@@ -6,6 +6,7 @@ import hexlet.code.interfaces.Game;
 public class GameStorage {
 
     private final Game[] games = {
+        new Progression(),
         new GCD(),
         new Calculator(),
         new Even(),

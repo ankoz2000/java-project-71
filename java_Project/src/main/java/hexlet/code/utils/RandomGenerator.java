@@ -10,6 +10,10 @@ public class RandomGenerator {
         return generateRandomNumber(0, 100);
     }
 
+    public static int getRandomNumberWithInterval(int low, int high) {
+        return generateRandomNumber(low, high);
+    }
+
     private static int generateRandomNumber(int low, int high) {
         return random.nextInt((high + low) + 1) + low;
     }
