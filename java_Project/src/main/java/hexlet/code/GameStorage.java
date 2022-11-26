@@ -30,7 +30,7 @@ public class GameStorage {
     }
 
     public Integer getGreetingId() {
-        return games.length - 2;
+        return 1;
     }
 
     public Game getExit() {
@@ -38,7 +38,7 @@ public class GameStorage {
     }
 
     public Integer getExitId() {
-        return games.length - 1;
+        return 0;
     }
 
     public Game[] getGames() {

@@ -14,13 +14,17 @@ public class App {
 
         int selectedGameId = Cli.selectGame();
 
-        Cli.showWelcomeLetter();
+        if (gameStorage.getExitId().equals(selectedGameId)) {
+            return;
+        } else {
+            Cli.showWelcomeLetter();
+            ((GamePreprocessor) gameStorage.getGreeting()).greet();
+            if (gameStorage.getGreetingId().equals(selectedGameId)) {
+                return;
+            }
+        }
 
         ((GamePreprocessor) gameStorage.getGreeting()).greet();
-        if (gameStorage.getExitId().equals(selectedGameId)
-                || gameStorage.getGreetingId().equals(selectedGameId)) {
-            return;
-        }
         Game game = gameStorage.getGameById(selectedGameId);
         Cli.showPreInteractionMessageToUser(game.getRules());
         while (roundsCount > 0) {
