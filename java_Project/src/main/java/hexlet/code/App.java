@@ -17,6 +17,10 @@ public class App {
         Cli.showWelcomeLetter();
 
         ((GamePreprocessor) gameStorage.getGreeting()).greet();
+        if (gameStorage.getExitId().equals(selectedGameId)
+                || gameStorage.getGreetingId().equals(selectedGameId)) {
+            return;
+        }
         Game game = gameStorage.getGameById(selectedGameId);
         Cli.showPreInteractionMessageToUser(game.getRules());
         while (roundsCount > 0) {
@@ -29,10 +33,9 @@ public class App {
             } else {
                 Cli.showErrorMessage("'" + game.getLastAnswer() + "'"
                         + " is wrong answer ;(. Correct answer was '" + game.getRightAnswer() + "'\n"
-                + "Let's try again, " + Greeting.getUsername() + "!");
+                        + "Let's try again, " + Greeting.getUsername() + "!");
             }
         }
-
         Cli.showEndMessage(Greeting.congratulation());
     }
 }

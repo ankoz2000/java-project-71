@@ -24,16 +24,24 @@ public class Prime implements Game {
     public void startRound() {
         int number = RandomGenerator.getRandomNumber();
         question = String.valueOf(number);
-        rightAnswer = IsPrime(number) ? "yes" : "no";
+        rightAnswer = isPrime(number) ? "yes" : "no";
     }
 
-    public boolean IsPrime(int number) {
-        if (number <= 1) return false;
-        if (number <= 3) return true;
-        if (number % 2 == 0) return false;
+    public boolean isPrime(int number) {
+        if (number <= 1) {
+            return false;
+        }
+        if (number <= 3) {
+            return true;
+        }
+        if (number % 2 == 0) {
+            return false;
+        }
         int k = (int) Math.round(Math.sqrt(number));
         for (int i = 3; i <= k; i += 2) {
-            if (number % k == 0) return false;
+            if (number % k == 0) {
+                return false;
+            }
         }
         return true;
     }
