@@ -12,10 +12,16 @@ import java.util.stream.Collectors;
 public class Differ {
 
     public static String generate(String firstFileData, String secondFileData) throws IOException {
+        if (firstFileData == null || secondFileData == null
+                || firstFileData.equals(secondFileData)) {
+            return "";
+        }
         ObjectMapper objectMapper = new ObjectMapper();
 
-        Map<String,Object> firstMap = objectMapper.readValue(firstFileData, new TypeReference<Map<String,Object>>(){});
-        Map<String,Object> secondMap = objectMapper.readValue(secondFileData, new TypeReference<Map<String,Object>>(){});
+        Map<String, Object> firstMap = objectMapper.readValue(firstFileData,
+                new TypeReference<Map<String, Object>>() { });
+        Map<String, Object> secondMap = objectMapper.readValue(secondFileData,
+                new TypeReference<Map<String, Object>>() { });
 
         List<DTO> differs = new ArrayList<>();
 

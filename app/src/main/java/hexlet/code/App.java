@@ -10,7 +10,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.List;
 import java.util.concurrent.Callable;
 
 @Command(name = "gendiff", mixinStandardHelpOptions = true, version = "gendiff 1.0",
@@ -43,7 +42,7 @@ public class App implements Callable<Integer> {
         return null;
     }
 
-    private String readFile(Path path) throws IOException {
+    private static String readFile(Path path) throws IOException {
         if (!Files.exists(path)) {
             throw new FileNotFoundException("File at path '" + path + "' not found");
         }
