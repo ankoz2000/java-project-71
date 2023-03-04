@@ -5,4 +5,4 @@ build:
 	make -C app clean build
 
 test:
-  make -C app test
+  	make -C app test
