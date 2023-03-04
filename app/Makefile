@@ -8,7 +8,6 @@ clean:
 build:
 	make -C app clean build
 
-test:
-	make -C app report
+test: ./gradlew test
 
 .PHONY: build
