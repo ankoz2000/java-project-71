@@ -1,9 +1,14 @@
+.DEFAULT_GOAL := build-run
+
 run-dist: ./build/install/app/bin/app
 
-clean: ./gradlew clean
+clean:
+	make -C app clean
 
-build: ./gradlew clean build
+build:
+	make -C app clean build
 
-test: ./gradlew test
+test:
+	make -C app report
 
 .PHONY: build
