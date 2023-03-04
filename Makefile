@@ -16,7 +16,7 @@ run:
 	make -C app run
 
 report:
-	make -C app report
+	./app/gradlew jacocoTestReport
 
 lint:
 	make -C app lint
