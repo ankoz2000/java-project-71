@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class Differ {
+
     public static String generate(String firstFileData, String secondFileData) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
 

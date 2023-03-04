@@ -1,6 +1,7 @@
 package hexlet.code;
 
 public class DTO implements Comparable<DTO> {
+
     private String key;
     private String value;
     private String differ;

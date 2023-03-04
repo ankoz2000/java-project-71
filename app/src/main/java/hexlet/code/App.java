@@ -49,8 +49,4 @@ public class App implements Callable<Integer> {
         }
         return String.join("", Files.readAllLines(path));
     }
-
-    private void compare(List<String> firstFileData, List<String> secondFileData) {
-
-    }
 }
