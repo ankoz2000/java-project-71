@@ -2,11 +2,9 @@
 
 run-dist: ./build/install/app/bin/app
 
-clean:
-	make -C app clean
+clean: ./gradlew clean
 
-build:
-	make -C app clean build
+build: ./gradlew clean build
 
 test: ./gradlew test
 
