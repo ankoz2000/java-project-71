@@ -43,8 +43,8 @@ public class DTO implements Comparable<DTO> {
 
     @Override
     public String toString() {
-        return (differ != null ? differ + " " : "")
-                + key + ": " + value + '\n';
+        return (differ != null ? "\s\s" + differ + " " : "\s\s\s\s")
+                + key + ": " + value;
     }
 
     @Override

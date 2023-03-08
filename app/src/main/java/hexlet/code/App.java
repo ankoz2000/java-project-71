@@ -42,10 +42,10 @@ public class App implements Callable<Integer> {
         return null;
     }
 
-    private static String readFile(Path path) throws IOException {
+    public static String readFile(Path path) throws IOException {
         if (!Files.exists(path)) {
             throw new FileNotFoundException("File at path '" + path + "' not found");
         }
-        return String.join("", Files.readAllLines(path));
+        return String.join("\n", Files.readAllLines(path));
     }
 }

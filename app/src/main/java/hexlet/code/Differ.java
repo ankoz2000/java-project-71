@@ -51,9 +51,10 @@ public class Differ {
             }
         });
 
-        return differs.stream()
+        return "{\n" + differs.stream()
                 .sorted(DTO::compareTo)
                 .map(DTO::toString)
-                .collect(Collectors.joining());
+                .collect(Collectors.joining("\n"))
+                + "\n}";
     }
 }
