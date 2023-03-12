@@ -3,15 +3,15 @@ package hexlet.code;
 public class DTO implements Comparable<DTO> {
 
     private String key;
-    private String value;
+    private Object value;
     private String differ;
 
-    public DTO(String key, String value) {
+    public DTO(String key, Object value) {
         this.key = key;
         this.value = value;
     }
 
-    public DTO(String key, String value, String differ) {
+    public DTO(String key, Object value, String differ) {
         this.key = key;
         this.value = value;
         this.differ = differ;
@@ -25,11 +25,11 @@ public class DTO implements Comparable<DTO> {
         this.key = key;
     }
 
-    public String getValue() {
+    public Object getValue() {
         return value;
     }
 
-    public void setValue(String value) {
+    public void setValue(Object value) {
         this.value = value;
     }
 
@@ -39,12 +39,6 @@ public class DTO implements Comparable<DTO> {
 
     public void setDiffer(String differ) {
         this.differ = differ;
-    }
-
-    @Override
-    public String toString() {
-        return (differ != null ? "\s\s" + differ + " " : "\s\s\s\s")
-                + key + ": " + value;
     }
 
     @Override

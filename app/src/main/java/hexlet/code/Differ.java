@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
+import java.util.Objects;
 
 public class Differ {
 
@@ -21,7 +21,7 @@ public class Differ {
 
         secondMap.entrySet().forEach(sm -> {
             if (!firstMap.containsKey(sm.getKey())) {
-                DTO added = new DTO(sm.getKey(), sm.getValue().toString(), "+");
+                DTO added = new DTO(sm.getKey(), sm.getValue(), "+");
                 differs.add(added);
             }
         });
@@ -29,26 +29,22 @@ public class Differ {
         firstMap.entrySet().forEach(fm -> {
             if (secondMap.containsKey(fm.getKey())) {
                 secondMap.entrySet().forEach(sm -> {
-                    if (sm.getKey().equals(fm.getKey())) {
-                        DTO oldDTO = new DTO(fm.getKey(), fm.getValue().toString());
+                    if (Objects.equals(sm.getKey(), fm.getKey())) {
+                        DTO oldDTO = new DTO(fm.getKey(), fm.getValue());
                         differs.add(oldDTO);
-                        if (!fm.getValue().equals(sm.getValue())) {
+                        if (!Objects.equals(fm.getValue(), sm.getValue())) {
                             oldDTO.setDiffer("-");
-                            DTO newDTO = new DTO(sm.getKey(), sm.getValue().toString(), "+");
+                            DTO newDTO = new DTO(sm.getKey(), sm.getValue(), "+");
                             differs.add(newDTO);
                         }
                     }
                 });
             } else {
-                DTO deleted = new DTO(fm.getKey(), fm.getValue().toString(), "-");
+                DTO deleted = new DTO(fm.getKey(), fm.getValue(), "-");
                 differs.add(deleted);
             }
         });
-
-        return "{\n" + differs.stream()
-                .sorted(DTO::compareTo)
-                .map(DTO::toString)
-                .collect(Collectors.joining("\n"))
-                + "\n}";
+        Stylish.format(differs);
+        return Stylish.format(differs);
     }
 }

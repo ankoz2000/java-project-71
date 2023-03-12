@@ -16,7 +16,7 @@ import java.util.concurrent.Callable;
         description = "Compares two configuration files and shows a difference.")
 public class App implements Callable<Integer> {
 
-    @Option(names = {"-f", "--format"}, description = "Show this help message and exit.", defaultValue = "json")
+    @Option(names = {"-f", "--format"}, description = "Show this help message and exit.", defaultValue = "stylish")
     private String format;
     @Parameters(paramLabel  = "filepath1", description = "path to first file")
     private String filepath1;
@@ -38,7 +38,8 @@ public class App implements Callable<Integer> {
         } catch (Exception e) {
             System.out.println(e.getLocalizedMessage());
         }
-        Differ.generate(firstFileData, secondFileData, format);
+        String fileFormat = filepath1.trim().split("\\.")[1];
+        Differ.generate(firstFileData, secondFileData, fileFormat);
         return null;
     }
 
