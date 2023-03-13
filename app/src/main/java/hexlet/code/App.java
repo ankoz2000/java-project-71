@@ -30,16 +30,7 @@ public class App implements Callable<Integer> {
 
     @Override
     public Integer call() throws Exception {
-        String firstFileData = null;
-        String secondFileData = null;
-        try {
-            firstFileData = readFile(Paths.get(filepath1));
-            secondFileData = readFile(Paths.get(filepath2));
-        } catch (Exception e) {
-            System.out.println(e.getLocalizedMessage());
-        }
-        String fileFormat = filepath1.trim().split("\\.")[1];
-        Differ.generate(firstFileData, secondFileData, fileFormat);
+        Differ.generate(Paths.get(filepath1), Paths.get(filepath2), format);
         return null;
     }
 

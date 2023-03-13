@@ -5,6 +5,8 @@ public class DTO implements Comparable<DTO> {
     private String key;
     private Object value;
     private String differ;
+    private Object oldValue;
+    private boolean isUpdated;
 
     public DTO(String key, Object value) {
         this.key = key;
@@ -39,6 +41,22 @@ public class DTO implements Comparable<DTO> {
 
     public void setDiffer(String differ) {
         this.differ = differ;
+    }
+
+    public Object getOldValue() {
+        return oldValue;
+    }
+
+    public void setOldValue(Object oldValue) {
+        this.oldValue = oldValue;
+    }
+
+    public boolean getIsUpdated() {
+        return isUpdated;
+    }
+
+    public void setIsUpdated(boolean updated) {
+        isUpdated = updated;
     }
 
     @Override
