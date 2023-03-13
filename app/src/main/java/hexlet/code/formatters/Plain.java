@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 public class Plain {
 
     public static String format(List<DTO> differs) {
-        String res = differs.stream()
+        return differs.stream()
                 .sorted(DTO::compareTo)
                 .filter(dto -> !dto.getIsUpdated())
                 .map(dto -> {
@@ -33,6 +33,5 @@ public class Plain {
                             + (isValueArrayOrObject ? "[complex value]" : dto.getValue().toString()) : "");
                 })
                 .collect(Collectors.joining("\n"));
-        return res;
     }
 }
