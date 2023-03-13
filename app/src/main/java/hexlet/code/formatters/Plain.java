@@ -25,8 +25,8 @@ public class Plain {
                     return dto;
                 })
                 .map(dto -> {
-                    boolean isValueArrayOrObject = dto.getValue().getClass().isArray() ||
-                            dto.getValue().getClass().getDeclaredFields().length > 0;
+                    boolean isValueArrayOrObject = dto.getValue().getClass().isArray()
+                            || dto.getValue().getClass().getDeclaredFields().length > 0;
                     return "Property '" + dto.getKey() + "' was " + dto.getDiffer() + "."
                             + (dto.getOldValue() != null ? ". From " + dto.getOldValue() + " to " + dto.getValue() : "")
                             + (dto.getDiffer() != null && dto.getDiffer().equals("added") ? " with value "
