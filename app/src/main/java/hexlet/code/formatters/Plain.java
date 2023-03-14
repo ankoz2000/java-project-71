@@ -10,7 +10,6 @@ public class Plain {
     public static String format(List<DTO> differs) {
         return differs.stream()
                 .sorted(DTO::compareTo)
-                .filter(dto -> !dto.getIsUpdated())
                 .map(dto -> {
                     if (dto.getDiffer() == null) {
                         return dto;

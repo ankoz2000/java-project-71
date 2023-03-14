@@ -42,13 +42,12 @@ public class Differ {
                 secondMap.entrySet().forEach(sm -> {
                     if (Objects.equals(sm.getKey(), fm.getKey())) {
                         DTO oldDTO = new DTO(fm.getKey(), fm.getValue());
-                        differs.add(oldDTO);
                         if (!Objects.equals(fm.getValue(), sm.getValue())) {
-                            oldDTO.setDiffer("-");
-                            oldDTO.setIsUpdated(true);
                             DTO newDTO = new DTO(sm.getKey(), sm.getValue(), "+");
-                            newDTO.setOldValue(fm.getValue());
+                            newDTO.setOldValue(oldDTO.getValue() == null ? "null" : oldDTO.getValue());
                             differs.add(newDTO);
+                        } else {
+                            differs.add(oldDTO);
                         }
                     }
                 });
