@@ -12,7 +12,7 @@ public class Differ {
     public static String generate(String filepath1, String filepath2, String format) throws IOException {
         if (filepath1 == null || filepath2 == null
                 || filepath1.equals(filepath2)) {
-            return new ArrayList<>();
+            return "";
         }
 
         String firstFileData = null;
