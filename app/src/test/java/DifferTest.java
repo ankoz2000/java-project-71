@@ -75,8 +75,8 @@ public class DifferTest {
     @Test
     public void emptyTest() {
         try {
-            assertEquals(Formatter.format(generate("./src/test/resources/empty", "./src/test/resources/empty") stylish), "");
-            assertEquals(Formatter.format(generate("./src/test/resources/empty", "./src/test/resources/empty") stylish), "");
+            assertEquals(Formatter.format(generate("./src/test/resources/empty", "./src/test/resources/empty"), stylish), "");
+            assertEquals(Formatter.format(generate("./src/test/resources/empty", "./src/test/resources/empty"), stylish), "");
         } catch (IOException e) {
             System.out.println("[TEST] Error: " + e.getLocalizedMessage());
         }
@@ -86,7 +86,7 @@ public class DifferTest {
     @Deprecated
     public void ymlTest() {
         try {
-            assertEquals(Formatter.format(generate(testStringYml1, testStringYml2) stylish), result);
+            assertEquals(Formatter.format(generate(testStringYml1, testStringYml2), stylish), result);
         } catch (IOException e) {
             System.out.println("[TEST] Error: " + e.getLocalizedMessage());
         }
