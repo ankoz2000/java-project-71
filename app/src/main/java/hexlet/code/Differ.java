@@ -9,7 +9,7 @@ import java.nio.file.Paths;
 
 public class Differ {
 
-    public static List<DTO> generate(String filepath1, String filepath2) throws IOException {
+    public static String generate(String filepath1, String filepath2, String format) throws IOException {
         if (filepath1 == null || filepath2 == null
                 || filepath1.equals(filepath2)) {
             return new ArrayList<>();
@@ -56,6 +56,6 @@ public class Differ {
                 differs.add(deleted);
             }
         });
-        return differs;
+        return Formatters.format(differs, format);
     }
 }
