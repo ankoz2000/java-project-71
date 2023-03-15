@@ -13,7 +13,9 @@ public class Formatter {
             return Stylish.format(data);
         } else if (format.equals("plain")) {
             return Plain.format(data);
+        } else if (format.equals("json")) {
+            return Json.format(data);
         }
-        return Json.format(data);
+        return null;
     }
 }

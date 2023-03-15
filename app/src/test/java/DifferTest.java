@@ -1,5 +1,4 @@
 import hexlet.code.App;
-import hexlet.code.Formatter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
