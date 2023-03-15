@@ -16,12 +16,12 @@ public class DifferTest {
     private String jsonResult;
     private Path testString1;
     private Path testString2;
-    private Path testRecursive1;
-    private Path testRecursive2;
-    private Path testRecursiveYml1;
-    private Path testRecursiveYml2;
-    private Path testStringYml1;
-    private Path testStringYml2;
+    private String testRecursive1;
+    private String testRecursive2;
+    private String testRecursiveYml1;
+    private String testRecursiveYml2;
+    private String testStringYml1;
+    private String testStringYml2;
     private final String json = "json";
     private final String yml = "yml";
     private final String stylish = "stylish";
@@ -31,6 +31,9 @@ public class DifferTest {
     public void prepare() throws IOException {
         String fp1 = "./src/test/resources/test1";
         String fp2 = "./src/test/resources/test2";
+        
+        String fp1Json = fp1 + "." + json;
+        String fp2Json = fp2 + "." + json;
 
         String fpr1 = "./src/test/resources/recursive1";
         String fpr2 = "./src/test/resources/recursive2";
@@ -38,14 +41,14 @@ public class DifferTest {
         testString1 = Paths.get(fp1 + "." + json);
         testString2 = Paths.get(fp2 + "." + json);
 
-        testStringYml1 = Paths.get(fp1 + "." + yml);
-        testStringYml2 = Paths.get(fp2 + "." + yml);
+        testStringYml1 = fp1 + "." + yml;
+        testStringYml2 = fp2 + "." + yml;
 
-        testRecursive1 = Paths.get(fpr1 + "." + json);
-        testRecursive2 = Paths.get(fpr2 + "." + json);
+        testRecursive1 = fpr1 + "." + json;
+        testRecursive2 = fpr2 + "." + json;
 
-        testRecursiveYml1 = Paths.get(fpr1 + "." + yml);
-        testRecursiveYml2 = Paths.get(fpr2 + "." + yml);
+        testRecursiveYml1 = fpr1 + "." + yml;
+        testRecursiveYml2 = pr2 + "." + yml;
 
         String resultFp = "./src/test/resources/result.txt";
         result = App.readFile(Paths.get(resultFp));
@@ -61,9 +64,9 @@ public class DifferTest {
     @Deprecated
     public void generalTest() {
         try {
-            assertEquals(generate(testString1, testString1, stylish), "");
-            assertEquals(generate(testString2, testString2, stylish), "");
-            assertEquals(generate(testString1, testString2, stylish), result);
+            assertEquals(generate(fp1Json, fp1Json, stylish), "");
+            assertEquals(generate(fp2Json, fp2Json, stylish), "");
+            assertEquals(generate(fp1Json, fp2Json, stylish), result);
         } catch (IOException e) {
             System.out.println("[TEST] Error: " + e.getLocalizedMessage());
         }
@@ -72,10 +75,8 @@ public class DifferTest {
     @Test
     public void emptyTest() {
         try {
-            assertEquals(generate(Paths.get("./src/test/resources/empty"),
-                    Paths.get("./src/test/resources/empty"), stylish), "");
-            assertEquals(generate(Paths.get("./src/test/resources/empty"),
-                    Paths.get("./src/test/resources/empty"), stylish), "");
+            assertEquals(generate("./src/test/resources/empty", "./src/test/resources/empty", stylish), "");
+            assertEquals(generate("./src/test/resources/empty", "./src/test/resources/empty", stylish), "");
         } catch (IOException e) {
             System.out.println("[TEST] Error: " + e.getLocalizedMessage());
         }
