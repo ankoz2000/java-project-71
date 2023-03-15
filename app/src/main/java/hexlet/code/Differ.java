@@ -56,6 +56,6 @@ public class Differ {
                 differs.add(deleted);
             }
         });
-        return Formatters.format(differs, format);
+        return Formatter.format(differs, format);
     }
 }
