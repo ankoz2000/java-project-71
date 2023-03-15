@@ -1,7 +1,7 @@
 package hexlet.code;
 
 import java.io.IOException;
-import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -9,17 +9,17 @@ import java.util.Objects;
 
 public class Differ {
 
-    public static String generate(Path filepath1, Path filepath2, String format) throws IOException {
+    public static List<DTO> generate(String filepath1, String filepath2) throws IOException {
         if (filepath1 == null || filepath2 == null
                 || filepath1.equals(filepath2)) {
-            return "";
+            return new ArrayList<>();
         }
 
         String firstFileData = null;
         String secondFileData = null;
         try {
-            firstFileData = App.readFile(filepath1);
-            secondFileData = App.readFile(filepath2);
+            firstFileData = App.readFile(Paths.get(filepath1));
+            secondFileData = App.readFile(Paths.get(filepath2));
         } catch (Exception e) {
             System.out.println(e.getLocalizedMessage());
         }
@@ -56,6 +56,6 @@ public class Differ {
                 differs.add(deleted);
             }
         });
-        return Formatter.format(differs, format);
+        return differs;
     }
 }
