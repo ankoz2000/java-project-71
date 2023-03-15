@@ -9,10 +9,10 @@ import java.util.Objects;
 
 public class Differ {
 
-    public static List<DTO> generate(String filepath1, String filepath2) throws IOException {
+    public static String generate(String filepath1, String filepath2, String format) throws IOException {
         if (filepath1 == null || filepath2 == null
                 || filepath1.equals(filepath2)) {
-            return new ArrayList<>();
+            return "";
         }
 
         String firstFileData = null;
@@ -56,6 +56,6 @@ public class Differ {
                 differs.add(deleted);
             }
         });
-        return differs;
+        return Formatter.format(differs, format);
     }
 }
