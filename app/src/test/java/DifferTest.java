@@ -14,8 +14,6 @@ public class DifferTest {
     private String recursiveResult;
     private String plainResult;
     private String jsonResult;
-    private String testString1;
-    private String testString2;
     private String testRecursive1;
     private String testRecursive2;
     private String testRecursiveYml1;
@@ -34,9 +32,6 @@ public class DifferTest {
 
         String fpr1 = "./src/test/resources/recursive1";
         String fpr2 = "./src/test/resources/recursive2";
-
-        testString1 = fp1 + "." + json;
-        testString2 = fp2 + "." + json;
 
         testStringYml1 = fp1 + "." + yml;
         testStringYml2 = fp2 + "." + yml;
@@ -58,18 +53,6 @@ public class DifferTest {
 
         String plainResultFp = "./src/test/resources/plainResult.txt";
         plainResult = App.readFile(Paths.get(plainResultFp));
-    }
-
-    @Test
-    @Deprecated
-    public void generalTest() {
-        try {
-            assertEquals(generate(testString1, testString1, stylish), "{\n\n}");
-            assertEquals(generate(testString2, testString2, stylish), "{\n\n}");
-            assertEquals(generate(testString1, testString2, stylish), result);
-        } catch (IOException e) {
-            System.out.println("[TEST] Error: " + e.getLocalizedMessage());
-        }
     }
 
     @Test
