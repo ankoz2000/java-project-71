@@ -9,7 +9,7 @@ import static hexlet.code.Differ.generate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class DifferTest {
+public final class DifferTest {
     private String result;
     private String recursiveResult;
     private String plainResult;

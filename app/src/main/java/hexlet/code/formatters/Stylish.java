@@ -22,10 +22,12 @@ public class Stylish {
 
     private static String getStr(DTO dto, boolean isEdit) {
         String old = "";
+        int fourSpaces = 4;
         if (isEdit) {
             old = "\s".repeat(2) + "- " + dto.getKey() + ": " + dto.getOldValue() + "\n";
         }
-        return (isEdit ? old : "") + (dto.getDiffer() != null ? "\s".repeat(2) + dto.getDiffer() + " " : "\s".repeat(4))
+        return (isEdit ? old : "") + (dto.getDiffer() != null ? "\s".repeat(2) + dto.getDiffer()
+                + " " : "\s".repeat(fourSpaces))
                 + dto.getKey() + ": "
                 + ((dto.getValue() != null) ? dto.getValue().toString() : "null");
     }
