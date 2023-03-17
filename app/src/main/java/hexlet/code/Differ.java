@@ -9,6 +9,10 @@ import java.util.Objects;
 
 public class Differ {
 
+    public static String generate(String filepath1, String filepath2) throws IOException {
+        return generate(filepath1, filepath2, "stylish");
+    }
+
     public static String generate(String filepath1, String filepath2, String format) throws IOException {
         if (filepath1 == null || filepath2 == null
                 || filepath1.equals(filepath2)) {
