@@ -12,6 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class DifferTest {
     private String result;
     private String recursiveResult;
+    private String plainResult;
     private String jsonResult;
     private String testString1;
     private String testString2;
@@ -54,6 +55,9 @@ public class DifferTest {
 
         String jsonResultFp = "./src/test/resources/jsonResult.txt";
         jsonResult = App.readFile(Paths.get(jsonResultFp));
+
+        String plainResultFp = "./src/test/resources/plainResult.txt";
+        plainResult = App.readFile(Paths.get(plainResultFp));
     }
 
     @Test
@@ -111,7 +115,7 @@ public class DifferTest {
     @Test
     public void plainFormatTest() {
         try {
-            assertEquals(generate(testRecursiveYml1, testRecursiveYml2, plain), recursiveResult);
+            assertEquals(generate(testRecursiveYml1, testRecursiveYml2, plain), plainResult);
         } catch (IOException e) {
             System.out.println("[TEST] Error: " + e.getLocalizedMessage());
         }

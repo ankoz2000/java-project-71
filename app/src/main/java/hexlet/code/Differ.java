@@ -24,7 +24,7 @@ public class Differ {
             System.out.println(e.getLocalizedMessage());
         }
 
-        String fileFormat = filepath1.toString().trim().split("\\.")[1];
+        String fileFormat = filepath1.toString().trim().split("\\.")[2];
         Map<String, Object> firstMap = Parser.parse(firstFileData, fileFormat);
         Map<String, Object> secondMap = Parser.parse(secondFileData, fileFormat);
 
