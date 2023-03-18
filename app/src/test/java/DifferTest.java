@@ -1,5 +1,4 @@
 import hexlet.code.App;
-import hexlet.code.Formatter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -10,12 +9,11 @@ import static hexlet.code.Differ.generate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class DifferTest {
+public final class DifferTest {
     private String result;
     private String recursiveResult;
+    private String plainResult;
     private String jsonResult;
-    private String testString1;
-    private String testString2;
     private String testRecursive1;
     private String testRecursive2;
     private String testRecursiveYml1;
@@ -35,9 +33,6 @@ public class DifferTest {
         String fpr1 = "./src/test/resources/recursive1";
         String fpr2 = "./src/test/resources/recursive2";
 
-        testString1 = fp1 + "." + json;
-        testString2 = fp2 + "." + json;
-
         testStringYml1 = fp1 + "." + yml;
         testStringYml2 = fp2 + "." + yml;
 
@@ -55,27 +50,18 @@ public class DifferTest {
 
         String jsonResultFp = "./src/test/resources/jsonResult.txt";
         jsonResult = App.readFile(Paths.get(jsonResultFp));
-    }
 
-    @Test
-    @Deprecated
-    public void generalTest() {
-        try {
-            assertEquals(Formatter.format(generate(testString1, testString1), stylish), "{\n\n}");
-            assertEquals(Formatter.format(generate(testString2, testString2), stylish), "{\n\n}");
-            assertEquals(Formatter.format(generate(testString1, testString2), stylish), result);
-        } catch (IOException e) {
-            System.out.println("[TEST] Error: " + e.getLocalizedMessage());
-        }
+        String plainResultFp = "./src/test/resources/plainResult.txt";
+        plainResult = App.readFile(Paths.get(plainResultFp));
     }
 
     @Test
     public void emptyTest() {
         try {
-            assertEquals(Formatter.format(generate("./src/test/resources/empty",
-                    "./src/test/resources/empty"), stylish), "{\n\n}");
-            assertEquals(Formatter.format(generate("./src/test/resources/empty",
-                    "./src/test/resources/empty"), stylish), "{\n\n}");
+            assertEquals(generate("./src/test/resources/empty",
+                    "./src/test/resources/empty", stylish), "{\n\n}");
+            assertEquals(generate("./src/test/resources/empty",
+                    "./src/test/resources/empty", stylish), "{\n\n}");
         } catch (IOException e) {
             System.out.println("[TEST] Error: " + e.getLocalizedMessage());
         }
@@ -85,7 +71,7 @@ public class DifferTest {
     @Deprecated
     public void ymlTest() {
         try {
-            assertEquals(Formatter.format(generate(testStringYml1, testStringYml2), stylish), result);
+            assertEquals(generate(testStringYml1, testStringYml2, stylish), result);
         } catch (IOException e) {
             System.out.println("[TEST] Error: " + e.getLocalizedMessage());
         }
@@ -94,7 +80,7 @@ public class DifferTest {
     @Test
     public void recursiveJsonTest() {
         try {
-            assertEquals(Formatter.format(generate(testRecursive1, testRecursive2), stylish), recursiveResult);
+            assertEquals(generate(testRecursive1, testRecursive2, stylish), recursiveResult);
         } catch (IOException e) {
             System.out.println("[TEST] Error: " + e.getLocalizedMessage());
         }
@@ -103,7 +89,7 @@ public class DifferTest {
     @Test
     public void recursiveYmlTest() {
         try {
-            assertEquals(Formatter.format(generate(testRecursiveYml1, testRecursiveYml2), stylish), recursiveResult);
+            assertEquals(generate(testRecursiveYml1, testRecursiveYml2, stylish), recursiveResult);
         } catch (IOException e) {
             System.out.println("[TEST] Error: " + e.getLocalizedMessage());
         }
@@ -112,7 +98,7 @@ public class DifferTest {
     @Test
     public void plainFormatTest() {
         try {
-            assertEquals(Formatter.format(generate(testRecursiveYml1, testRecursiveYml2), plain), recursiveResult);
+            assertEquals(generate(testRecursiveYml1, testRecursiveYml2, plain), plainResult);
         } catch (IOException e) {
             System.out.println("[TEST] Error: " + e.getLocalizedMessage());
         }
@@ -121,7 +107,7 @@ public class DifferTest {
     @Test
     public void jsonFormatTest() {
         try {
-            assertEquals(Formatter.format(generate(testRecursive1, testRecursive2), json), jsonResult);
+            assertEquals(generate(testRecursive1, testRecursive2, json), jsonResult);
         } catch (IOException e) {
             System.out.println("[TEST] Error: " + e.getLocalizedMessage());
         }

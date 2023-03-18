@@ -9,10 +9,14 @@ import java.util.Objects;
 
 public class Differ {
 
-    public static List<DTO> generate(String filepath1, String filepath2) throws IOException {
+    public static String generate(String filepath1, String filepath2) throws IOException {
+        return generate(filepath1, filepath2, "stylish");
+    }
+
+    public static String generate(String filepath1, String filepath2, String format) throws IOException {
         if (filepath1 == null || filepath2 == null
                 || filepath1.equals(filepath2)) {
-            return new ArrayList<>();
+            return "{\n\n}";
         }
 
         String firstFileData = null;
@@ -23,8 +27,8 @@ public class Differ {
         } catch (Exception e) {
             System.out.println(e.getLocalizedMessage());
         }
-
-        String fileFormat = filepath1.toString().trim().split("\\.")[1];
+        String[] filePathArray = filepath1.trim().split("\\.");
+        String fileFormat = filePathArray[filePathArray.length - 1];
         Map<String, Object> firstMap = Parser.parse(firstFileData, fileFormat);
         Map<String, Object> secondMap = Parser.parse(secondFileData, fileFormat);
 
@@ -56,6 +60,6 @@ public class Differ {
                 differs.add(deleted);
             }
         });
-        return differs;
+        return Formatter.format(differs, format);
     }
 }
