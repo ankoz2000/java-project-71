@@ -8,14 +8,12 @@ import java.util.List;
 
 public class Formatter {
 
-    public static String format(List<DTO> data, String format) {
-        if (format.equals("stylish")) {
-            return Stylish.format(data);
-        } else if (format.equals("plain")) {
-            return Plain.format(data);
-        } else if (format.equals("json")) {
-            return Json.format(data);
-        }
-        return null;
+    public static String format(List<DTO> data, String format) throws Exception {
+        return switch (format) {
+            case "stylish" -> Stylish.format(data);
+            case "plain" -> Plain.format(data);
+            case "json" -> Json.format(data);
+            default -> throw new Exception("Unknown format");
+        };
     }
 }

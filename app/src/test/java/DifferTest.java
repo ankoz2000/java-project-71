@@ -1,4 +1,4 @@
-import hexlet.code.App;
+import hexlet.code.Differ;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -43,16 +43,16 @@ public final class DifferTest {
         testRecursiveYml2 = fpr2 + "." + yml;
 
         String resultFp = "./src/test/resources/result.txt";
-        result = App.readFile(Paths.get(resultFp));
+        result = Differ.readFile(Paths.get(resultFp));
 
         String recursiveResultFp = "./src/test/resources/recursiveResult.txt";
-        recursiveResult = App.readFile(Paths.get(recursiveResultFp));
+        recursiveResult = Differ.readFile(Paths.get(recursiveResultFp));
 
         String jsonResultFp = "./src/test/resources/jsonResult.txt";
-        jsonResult = App.readFile(Paths.get(jsonResultFp));
+        jsonResult = Differ.readFile(Paths.get(jsonResultFp));
 
         String plainResultFp = "./src/test/resources/plainResult.txt";
-        plainResult = App.readFile(Paths.get(plainResultFp));
+        plainResult = Differ.readFile(Paths.get(plainResultFp));
     }
 
     @Test
@@ -62,7 +62,7 @@ public final class DifferTest {
                     "./src/test/resources/empty", stylish), "{\n\n}");
             assertEquals(generate("./src/test/resources/empty",
                     "./src/test/resources/empty", stylish), "{\n\n}");
-        } catch (IOException e) {
+        } catch (Exception e) {
             System.out.println("[TEST] Error: " + e.getLocalizedMessage());
         }
     }
@@ -72,7 +72,7 @@ public final class DifferTest {
     public void ymlTest() {
         try {
             assertEquals(generate(testStringYml1, testStringYml2, stylish), result);
-        } catch (IOException e) {
+        } catch (Exception e) {
             System.out.println("[TEST] Error: " + e.getLocalizedMessage());
         }
     }
@@ -81,7 +81,7 @@ public final class DifferTest {
     public void recursiveJsonTest() {
         try {
             assertEquals(generate(testRecursive1, testRecursive2, stylish), recursiveResult);
-        } catch (IOException e) {
+        } catch (Exception e) {
             System.out.println("[TEST] Error: " + e.getLocalizedMessage());
         }
     }
@@ -90,7 +90,7 @@ public final class DifferTest {
     public void recursiveYmlTest() {
         try {
             assertEquals(generate(testRecursiveYml1, testRecursiveYml2, stylish), recursiveResult);
-        } catch (IOException e) {
+        } catch (Exception e) {
             System.out.println("[TEST] Error: " + e.getLocalizedMessage());
         }
     }
@@ -99,7 +99,7 @@ public final class DifferTest {
     public void plainFormatTest() {
         try {
             assertEquals(generate(testRecursiveYml1, testRecursiveYml2, plain), plainResult);
-        } catch (IOException e) {
+        } catch (Exception e) {
             System.out.println("[TEST] Error: " + e.getLocalizedMessage());
         }
     }
@@ -108,7 +108,7 @@ public final class DifferTest {
     public void jsonFormatTest() {
         try {
             assertEquals(generate(testRecursive1, testRecursive2, json), jsonResult);
-        } catch (IOException e) {
+        } catch (Exception e) {
             System.out.println("[TEST] Error: " + e.getLocalizedMessage());
         }
     }

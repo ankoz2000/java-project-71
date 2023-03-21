@@ -11,7 +11,7 @@ public class Parser {
 
     public static Map<String, Object> parse(String data, String format) throws JsonProcessingException {
         ObjectMapper mapper;
-        if (format.equals("yml")) {
+        if (format.equals("yml") || format.equals("yaml")) {
             mapper = new YAMLMapper();
         } else {
             mapper = new ObjectMapper();

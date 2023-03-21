@@ -5,15 +5,14 @@ import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.concurrent.Callable;
 
 @Command(name = "gendiff", mixinStandardHelpOptions = true, version = "gendiff 1.0",
         description = "Compares two configuration files and shows a difference.")
 public final class App implements Callable<Integer> {
+
+    private static final int SUCCESS_EXIT_CODE = 0;
+    private static final int ERROR_EXIT_CODE = 1;
 
     @Option(names = {"-f", "--format"}, description = "Show this help message and exit.", defaultValue = "stylish")
     private String format;
@@ -29,14 +28,12 @@ public final class App implements Callable<Integer> {
 
     @Override
     public Integer call() throws Exception {
-        System.out.println(Differ.generate(filepath1, filepath2, format));
-        return null;
-    }
-
-    public static String readFile(Path path) throws IOException {
-        if (!Files.exists(path)) {
-            throw new FileNotFoundException("File at path '" + path + "' not found");
+        try {
+            System.out.println(Differ.generate(filepath1, filepath2, format));
+        } catch (Exception e) {
+            System.out.println("Exception while generating differs");
+            return ERROR_EXIT_CODE;
         }
-        return String.join("\n", Files.readAllLines(path));
+        return SUCCESS_EXIT_CODE;
     }
 }
