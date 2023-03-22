@@ -1,115 +1,53 @@
-import hexlet.code.Differ;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import static hexlet.code.Differ.generate;
+import hexlet.code.Differ;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
+import org.skyscreamer.jsonassert.JSONAssert;
+import static org.assertj.core.api.Assertions.assertThat;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+class DifferTest {
 
-public final class DifferTest {
-    private String result;
-    private String recursiveResult;
-    private String plainResult;
-    private String jsonResult;
-    private String testRecursive1;
-    private String testRecursive2;
-    private String testRecursiveYml1;
-    private String testRecursiveYml2;
-    private String testStringYml1;
-    private String testStringYml2;
-    private final String json = "json";
-    private final String yml = "yml";
-    private final String stylish = "stylish";
-    private final String plain = "plain";
+    private static String resultJson;
+    private static String resultPlain;
+    private static String resultStylish;
 
-    @BeforeEach
-    public void prepare() throws IOException {
-        String fp1 = "./src/test/resources/test1";
-        String fp2 = "./src/test/resources/test2";
-
-        String fpr1 = "./src/test/resources/recursive1";
-        String fpr2 = "./src/test/resources/recursive2";
-
-        testStringYml1 = fp1 + "." + yml;
-        testStringYml2 = fp2 + "." + yml;
-
-        testRecursive1 = fpr1 + "." + json;
-        testRecursive2 = fpr2 + "." + json;
-
-        testRecursiveYml1 = fpr1 + "." + yml;
-        testRecursiveYml2 = fpr2 + "." + yml;
-
-        String resultFp = "./src/test/resources/result.txt";
-        result = Differ.readFile(Paths.get(resultFp));
-
-        String recursiveResultFp = "./src/test/resources/recursiveResult.txt";
-        recursiveResult = Differ.readFile(Paths.get(recursiveResultFp));
-
-        String jsonResultFp = "./src/test/resources/jsonResult.txt";
-        jsonResult = Differ.readFile(Paths.get(jsonResultFp));
-
-        String plainResultFp = "./src/test/resources/plainResult.txt";
-        plainResult = Differ.readFile(Paths.get(plainResultFp));
+    private static Path getFixturePath(String fileName) {
+        return Paths.get("src", "test", "resources", "fixtures", fileName)
+                .toAbsolutePath().normalize();
     }
 
-    @Test
-    public void emptyTest() {
-        try {
-            assertEquals(generate("./src/test/resources/empty",
-                    "./src/test/resources/empty", stylish), "{\n\n}");
-            assertEquals(generate("./src/test/resources/empty",
-                    "./src/test/resources/empty", stylish), "{\n\n}");
-        } catch (Exception e) {
-            System.out.println("[TEST] Error: " + e.getLocalizedMessage());
-        }
+    private static String readFixture(String fileName) throws Exception {
+        Path filePath = getFixturePath(fileName);
+        return Files.readString(filePath).trim();
     }
 
-    @Test
-    @Deprecated
-    public void ymlTest() {
-        try {
-            assertEquals(generate(testStringYml1, testStringYml2, stylish), result);
-        } catch (Exception e) {
-            System.out.println("[TEST] Error: " + e.getLocalizedMessage());
-        }
+    @BeforeAll
+    public static void beforeAll() throws Exception {
+        resultJson = readFixture("result_json.json");
+        resultPlain = readFixture("result_plain.txt");
+        resultStylish = readFixture("result_stylish.txt");
     }
 
-    @Test
-    public void recursiveJsonTest() {
-        try {
-            assertEquals(generate(testRecursive1, testRecursive2, stylish), recursiveResult);
-        } catch (Exception e) {
-            System.out.println("[TEST] Error: " + e.getLocalizedMessage());
-        }
-    }
+    @ParameterizedTest
+    @ValueSource(strings = {"json", "yml"})
+    public void generateTest(String format) throws Exception {
+        String filePath1 = getFixturePath("file1." + format).toString();
+        String filePath2 = getFixturePath("file2." + format).toString();
 
-    @Test
-    public void recursiveYmlTest() {
-        try {
-            assertEquals(generate(testRecursiveYml1, testRecursiveYml2, stylish), recursiveResult);
-        } catch (Exception e) {
-            System.out.println("[TEST] Error: " + e.getLocalizedMessage());
-        }
-    }
+        assertThat(Differ.generate(filePath1, filePath2))
+                .isEqualTo(resultStylish);
 
-    @Test
-    public void plainFormatTest() {
-        try {
-            assertEquals(generate(testRecursiveYml1, testRecursiveYml2, plain), plainResult);
-        } catch (Exception e) {
-            System.out.println("[TEST] Error: " + e.getLocalizedMessage());
-        }
-    }
+        assertThat(Differ.generate(filePath1, filePath2, "stylish"))
+                .isEqualTo(resultStylish);
 
-    @Test
-    public void jsonFormatTest() {
-        try {
-            assertEquals(generate(testRecursive1, testRecursive2, json), jsonResult);
-        } catch (Exception e) {
-            System.out.println("[TEST] Error: " + e.getLocalizedMessage());
-        }
+        assertThat(Differ.generate(filePath1, filePath2, "plain"))
+                .isEqualTo(resultPlain);
+
+        String actualJson = Differ.generate(filePath1, filePath2, "json");
+        JSONAssert.assertEquals(resultJson, actualJson, false);
     }
 }

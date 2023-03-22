@@ -12,6 +12,6 @@ public class Json {
     public static String format(List<DTO> differs) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.configure(SerializationFeature.INDENT_OUTPUT, true);
-        return "{\n" + objectMapper.writeValueAsString(differs) + "\n}";
+        return objectMapper.writeValueAsString(differs);
     }
 }
