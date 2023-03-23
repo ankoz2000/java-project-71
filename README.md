@@ -5,4 +5,18 @@
 
 
 ### Run examples
+```
+make run /path/to/file1.json /path/to/file2.json
+```
+![image](https://user-images.githubusercontent.com/52471156/227310423-bc78ef80-541d-417b-8cf7-8cc74e918df0.png)
+
+```
+make run /path/to/file1.json /path/to/file2.json -f plain
+```
+![image](https://user-images.githubusercontent.com/52471156/227310766-55365819-e08c-4e10-bcae-975a0182d4c1.png)
+
+```
+make run /path/to/file1.json /path/to/file2.json -f json
+```
+![image](https://user-images.githubusercontent.com/52471156/227310887-993664de-1473-444e-85a6-ee3093e9e424.png)
 
