@@ -13,7 +13,7 @@ public class Formatter {
             case "stylish" -> Stylish.format(data);
             case "plain" -> Plain.format(data);
             case "json" -> Json.format(data);
-            default -> throw new Exception("Unknown format");
+            default -> throw new Exception("Unknown format: '" + format + "'");
         };
     }
 }

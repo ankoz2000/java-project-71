@@ -9,13 +9,21 @@ import java.util.Map;
 
 public class Parser {
 
-    public static Map<String, Object> parse(String data, String format) throws JsonProcessingException {
-        ObjectMapper mapper;
-        if (format.equals("yml") || format.equals("yaml")) {
-            mapper = new YAMLMapper();
-        } else {
-            mapper = new ObjectMapper();
-        }
-        return mapper.readValue(data, new TypeReference<>() { });
+    public static Map<String, Object> parse(String data, String format) throws Exception {
+        return switch (format) {
+            case "yml", "yaml" -> parseYaml(data);
+            case "json" -> parseJson(data);
+            default -> throw new Exception("Unknown format: '" + format + "'");
+        };
+    }
+
+    public static Map<String, Object> parseYaml(String content) throws JsonProcessingException {
+        ObjectMapper mapper = new YAMLMapper();
+        return mapper.readValue(content, new TypeReference<>() { });
+    }
+
+    public static Map<String, Object> parseJson(String content) throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
+        return mapper.readValue(content, new TypeReference<>() { });
     }
 }

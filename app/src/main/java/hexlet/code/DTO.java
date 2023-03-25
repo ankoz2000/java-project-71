@@ -18,6 +18,13 @@ public final class DTO implements Comparable<DTO> {
         this.differ = differ;
     }
 
+    public DTO(String key, Object value, String differ, Object oldValue) {
+        this.key = key;
+        this.value = value;
+        this.differ = differ;
+        this.oldValue = oldValue;
+    }
+
     public String getKey() {
         return key;
     }
